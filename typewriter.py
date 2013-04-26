@@ -32,9 +32,11 @@ def main():
 
     player_cink = pyglet.media.Player()
     player_cink.queue(snd_cink)
+    player_cink.eos_action = pyglet.media.Player.EOS_PAUSE
 
     player_stroke = pyglet.media.Player()
     player_stroke.queue(snd_stroke)
+    player_stroke.eos_action = pyglet.media.Player.EOS_PAUSE
     while True:
         select([dev], [], [])
         for event in dev.read():
