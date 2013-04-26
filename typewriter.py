@@ -24,8 +24,8 @@ def main():
             ecodes.KEY_TAB, ecodes.KEY_GRAVE, ecodes.KEY_SEMICOLON,
             ecodes.KEY_APOSTROPHE, ecodes.KEY_RIGHTBRACE, ecodes.KEY_LEFTBRACE,
             ecodes.KEY_BACKSLASH, ecodes.KEY_MINUS, ecodes.KEY_SLASH,
-            ecodes.KEY_EQUAL
-            ]
+            ecodes.KEY_EQUAL, ecodes.KEY_HOME, ecodes.KEY_END
+        ]
 
     snd_stroke = pyglet.media.load('/home/dan/tmp/typewriter/sounds/stroke.wav', streaming=False)
     snd_cink = pyglet.media.load('/home/dan/tmp/typewriter/sounds/cink.wav', streaming=False)
