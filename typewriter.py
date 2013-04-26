@@ -8,25 +8,38 @@ import time
 def main():
     dev = InputDevice('/dev/input/by-path/platform-i8042-serio-0-event-kbd')
 
-    allowed = range(ecodes.KEY_A, ecodes.KEY_Z + 1) + \
-            range(ecodes.KEY_0, ecodes.KEY_9 + 1) + [   
-                    ecodes.KEY_DOT, ecodes.KEY_COMMA, ecodes.KEY_ENTER,
-                    ecodes.KEY_BACKSPACE, ecodes.KEY_SPACE, ecodes.KEY_PAGEUP,
-                    ecodes.KEY_PAGEDOWN, ecodes.KEY_LEFT, ecodes.KEY_RIGHT,
-                    ecodes.KEY_UP, ecodes.KEY_DOWN
-                ]
+    allowed_keys = [
+            ecodes.KEY_A, ecodes.KEY_B, ecodes.KEY_D, ecodes.KEY_E,
+            ecodes.KEY_F, ecodes.KEY_G, ecodes.KEY_H, ecodes.KEY_I,
+            ecodes.KEY_J, ecodes.KEY_K, ecodes.KEY_L, ecodes.KEY_M,
+            ecodes.KEY_N, ecodes.KEY_O, ecodes.KEY_P, ecodes.KEY_Q,
+            ecodes.KEY_R, ecodes.KEY_S, ecodes.KEY_T, ecodes.KEY_U,
+            ecodes.KEY_V, ecodes.KEY_W, ecodes.KEY_X, ecodes.KEY_Y,
+            ecodes.KEY_Z, ecodes.KEY_0, ecodes.KEY_1, ecodes.KEY_2,
+            ecodes.KEY_3, ecodes.KEY_4, ecodes.KEY_5, ecodes.KEY_6,
+            ecodes.KEY_7, ecodes.KEY_8, ecodes.KEY_9, ecodes.KEY_DOT,
+            ecodes.KEY_COMMA, ecodes.KEY_ENTER, ecodes.KEY_BACKSPACE,
+            ecodes.KEY_SPACE, ecodes.KEY_PAGEUP, ecodes.KEY_PAGEDOWN,
+            ecodes.KEY_LEFT, ecodes.KEY_RIGHT, ecodes.KEY_UP, ecodes.KEY_DOWN,
+            ecodes.KEY_TAB, ecodes.KEY_GRAVE, ecodes.KEY_SEMICOLON,
+            ecodes.KEY_APOSTROPHE, ecodes.KEY_RIGHTBRACE, ecodes.KEY_LEFTBRACE,
+            ecodes.KEY_BACKSLASH, ecodes.KEY_MINUS, ecodes.KEY_SLASH,
+            ecodes.KEY_EQUAL
+            ]
 
     snd_stroke = pyglet.media.load('/home/dan/tmp/typewriter/sounds/stroke.wav', streaming=False)
     snd_cink = pyglet.media.load('/home/dan/tmp/typewriter/sounds/cink.wav', streaming=False)
-    player_stroke = pyglet.media.ManagedSoundPlayer()
-    player_stroke.queue(snd_stroke)
-    player_cink = pyglet.media.ManagedSoundPlayer()
+
+    player_cink = pyglet.media.Player()
     player_cink.queue(snd_cink)
+
+    player_stroke = pyglet.media.Player()
+    player_stroke.queue(snd_stroke)
     while True:
         select([dev], [], [])
         for event in dev.read():
-            if event.type == ecodes.EV_KEY and event.value == 0:
-                if event.code in allowed:
+            if event.type == ecodes.EV_KEY and event.value in (0, 2):
+                if event.code in allowed_keys:
                     if event.code == ecodes.KEY_ENTER:
                         player_cink.seek(0)
                         player_cink.play()
