@@ -1,0 +1,5 @@
+*.swp
+*.swo
+typewriter.egg-info/
+dist
+build
