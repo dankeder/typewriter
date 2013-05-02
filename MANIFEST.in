@@ -1,0 +1,3 @@
+graft typewriter
+include *.md
+include sounds/*.wav

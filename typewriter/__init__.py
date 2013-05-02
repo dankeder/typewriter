@@ -1,12 +1,25 @@
-#!/usr/bin/env python
-
 from evdev import InputDevice, ecodes
 from select import select
 import pyglet
 import time
+import argparse
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+            description='Typewriter sounds')
+
+    parser.add_argument('device',
+            type=str,
+            help="path to the input device",
+            )
+
+    return parser.parse_args()
+
 
 def main():
-    dev = InputDevice('/dev/input/by-path/platform-i8042-serio-0-event-kbd')
+    args = parse_args()
+
+    dev = InputDevice(args.device)
 
     allowed_keys = [
             ecodes.KEY_A, ecodes.KEY_B, ecodes.KEY_D, ecodes.KEY_E,
@@ -27,8 +40,8 @@ def main():
             ecodes.KEY_EQUAL, ecodes.KEY_HOME, ecodes.KEY_END
         ]
 
-    snd_stroke = pyglet.media.load('/home/dan/tmp/typewriter/sounds/stroke.wav', streaming=False)
-    snd_cink = pyglet.media.load('/home/dan/tmp/typewriter/sounds/cink.wav', streaming=False)
+    snd_stroke = pyglet.media.load('sounds/stroke.wav', streaming=False)
+    snd_cink = pyglet.media.load('sounds/cink.wav', streaming=False)
 
     player_cink = pyglet.media.Player()
     player_cink.queue(snd_cink)
