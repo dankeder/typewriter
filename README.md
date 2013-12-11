@@ -28,6 +28,11 @@ Known issues
 
 
 Licence
-=======
+-------
 
 Public domain.
+
+Author
+------
+
+Dan Keder <dan.keder@gmail.com>
